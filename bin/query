@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "gcs"
+
+require 'digest/sha1'
+
+filename = ARGV.first or abort("Usage: #{$0} FILENAME")
+gcs = GCS::Reader.new(File.new(ARGV.first))
+p gcs
+
+STDIN.each_line do |line|
+  h = Digest::SHA1.hexdigest(line.chomp)[0,16].to_i(16)
+  puts "Found: #{gcs.exists?(h)}"
+end
+
