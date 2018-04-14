@@ -8,6 +8,10 @@ module GCS
     attr_reader :n
     attr_reader :p
 
+    def inspect
+      "#<#{self.class}:0x#{self.object_id.to_s(16)} n=#{@n} p=#{@p} indexsize=#{@index.size} io=#{@io.inspect}"
+    end
+
     def initialize(io)
       io.seek(-40, IO::SEEK_END)
       footer = io.read(40)
@@ -19,7 +23,8 @@ module GCS
       @log2p = Math.log2(@p).ceil
 
       io.seek(@end_of_data)
-      @index = Array.new(@index_len) do
+      @index = [[0,0]]
+      @index += Array.new(@index_len) do
         io.read(16).unpack('Q>2')
       end
 
