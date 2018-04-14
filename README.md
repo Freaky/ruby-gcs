@@ -10,9 +10,9 @@ production-ready well-tested gem.
 ## Usage
 
     gcs = GCS::Reader.new(File.new('pwned-passwords-2.0.gcs'))
-    hash = Digest::SHA1.hexdigest("password")[0..16].to_i(16)
+    hash = Digest::SHA1.hexdigest("password")[0,16].to_i(16)
     gcs.exists?(hash) # => true
-    hash = Digest::SHA1.hexdigest("not a leaked password")[0..16].to_i(16)
+    hash = Digest::SHA1.hexdigest("not a leaked password")[0,16].to_i(16)
     gcs.exists?(hash) # => false
 
 
