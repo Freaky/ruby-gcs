@@ -23,8 +23,7 @@ module GCS
         def lookup(key)
           low = 0
           high = @length # -1 ?
-          midkey, midval = 0
-          mid = low + high / 2
+          midkey = midval = mid = 0
 
           while low <= high
             mid = (low + high) / 2
