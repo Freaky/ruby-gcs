@@ -59,9 +59,9 @@ module GCS
         end
 
         def lookup(key)
-          idx = @index.bsearch_index { |x| x[0] >= key }
+          idx = @index.bsearch_index { |x| x[0] > key }
           if idx
-            @index[[idx - 1, 0].max]
+            @index[idx == 0 ? 0 : idx - 1]
           else
             @index.last
           end
