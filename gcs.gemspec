@@ -5,7 +5,7 @@ require "gcs/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "gcs"
-  spec.version       = Gcs::VERSION
+  spec.version       = GCS::VERSION
   spec.authors       = ["Thomas Hurst"]
   spec.email         = ["tom@hur.st"]
 

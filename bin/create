@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "gcs"
+
+require 'digest/sha1'
+
+if ARGV.size != 3
+  abort("Usage: #{$0} FPRATE INFILE OUTFILE")
+end
+
+fp = Integer(ARGV.shift)
+infile = File.new(ARGV.shift)
+outfile = File.new(ARGV.shift, 'w')
+
+gcs = GCS::Writer.new(outfile, fp)
+p gcs
+
+infile.each_line.with_index do |line, i|
+  h = Digest::SHA1.hexdigest(line.chomp)[0,16].to_i(16)
+  gcs << h
+
+  if i % 1_000_000 == 0
+    puts "#{i}..."
+  end
+end
+puts "Finish"
+p gcs.finish
+

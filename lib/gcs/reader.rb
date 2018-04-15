@@ -1,9 +1,7 @@
 
-require_relative 'bitreader'
+require_relative 'bitio'
 
 module GCS
-  GCS_MAGIC = '[GCS:v0]'
-
   class Reader
     attr_reader :n
     attr_reader :p
@@ -90,7 +88,7 @@ module GCS
 
       @index = indeximpl.new(io, @end_of_data, @index_len)
 
-      @io = BitReader.new(io)
+      @io = BitIO::Reader.new(io)
     end
 
     def exists?(key)
