@@ -26,7 +26,7 @@ module GCS
     attr_reader :n
     attr_reader :p
 
-    def initialize(io, fp, index_granularity = 20)
+    def initialize(io, fp, index_granularity = 1024)
       @io = io
       @p = fp
       @index_granularity = index_granularity
@@ -64,7 +64,7 @@ module GCS
 
       bits_written += encoder.finish
 
-      end_of_data = bits_written % 8
+      end_of_data = bits_written / 8
 
       index.each do |entry|
         @io.write(entry.pack('Q>2'))
