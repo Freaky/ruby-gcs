@@ -24,6 +24,4 @@ infile.each_line.with_index do |line, i|
     puts "#{i}..."
   end
 end
-puts "Finish"
-p gcs.finish
-
+gcs.finish
