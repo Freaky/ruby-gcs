@@ -11,6 +11,9 @@ p gcs
 
 STDIN.each_line do |line|
   h = Digest::SHA1.hexdigest(line.chomp)[0,16].to_i(16)
-  puts "Found: #{gcs.exists?(h)}"
+  start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  found = gcs.exists?(h)
+  elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
+  printf("%s in %.2fms\n", found ? 'Found' : 'Not found', elapsed * 1000)
 end
 
