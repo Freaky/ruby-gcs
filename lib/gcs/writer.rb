@@ -62,6 +62,7 @@ module GCS
         end
       end
 
+      bits_written += encoder.encode(0)
       bits_written += encoder.finish
 
       end_of_data = bits_written / 8

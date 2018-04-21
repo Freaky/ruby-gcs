@@ -103,11 +103,15 @@ module GCS
       @io.seek(pos)
 
       while last < h
+        diff = 0
         while @io.read_bit == 1
-          last += @p
+          diff += @p
         end
 
-        last += @io.read_bits(@log2p)
+        diff += @io.read_bits(@log2p)
+        last += diff
+
+        break if diff.zero?
       end
 
       last == h
