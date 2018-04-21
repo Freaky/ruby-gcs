@@ -10,7 +10,7 @@ Like Bloom filters, they have a controllable rate of false-positives - they may
 consider an element a member of a set even if it's never been seen before - while
 having no false negatives.  If a GCS hasn't seen it, it's not on the list.
 
-Their main benefit over Bloom filters is being a little more compact - particularlly
+Their main benefit over Bloom filters is being a little more compact - particularly
 with larger lists and better false-positive rates.
 
 ## Usage
